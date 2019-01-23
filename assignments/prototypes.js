@@ -25,30 +25,31 @@
     }
 
   function CharacterStats(childattr){ 
-    this.healthPoints = (`${childattr.healthPoints} HP`);
+    this.healthPoints = (`${childattr.healthPoints} HP(more than what Todd Howard has after Fallout 76 o.O)`);
     this.name = childattr.name;
+    GameObject.call(this, childattr);
+      this.isCharacterStats = childattr.isCharacterStats;
   }
-
-  CharacterStats.prototype.takeDamage = function (){
+ 
+  
+  CharacterStats.prototype.takeDamage = function (childattr){
     return `${object} took damage.`;
   }
 
    // prototype method -> returns the string '<object name> took damage.'
   //should inherit destroy() from GameObject's prototype
 
-  //  Person.prototype.speak = function () {
-//   return `Hello, my name is ${this.name}`;
-// };
-
+ 
 
 
   function Humanoid(grandchildattr){ /*(Having an appearance or character resembling that of a human.) ===*/
     this.team = grandchildattr.team;
     this.weapons = grandchildattr.weapons;
     this.language = grandchildattr.language
-    
+    CharacterStats.call(this, grandchildattr); 
+    this.isHumanoid = grandchildattr.isHumanoid; 
   }
-  Humanoid.prototype.greet = function(){
+  Humanoid.prototype.greet = function(grandchildattr){
     return `${this.name} offers a greeting in ${this.language}.`
   } 
   // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
@@ -57,15 +58,12 @@
 
 
 
-  function CharacterStats(childattr){
-      GameObject.call(this, childattr);
-      this.isCharacterStats = childattr.isCharacterStats;
-  }
 
-  function Humanoid(grandchildattr) {
-    CharacterStats.call(this, grandchildattr); 
-    this.isHumanoid = grandchildattr.isHumanoid; 
-  }
+
+  // function Humanoid(grandchildattr) {
+  //   CharacterStats.call(this, grandchildattr); 
+  //   this.isHumanoid = grandchildattr.isHumanoid; 
+  // }?????wWHY DOES THIS NEED TO BE NESTED IN THE FIRST HUMNAOID FUNCTION???
 
 
 
