@@ -8,32 +8,76 @@
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
   
-/*
-  === GameObject ===
-  * createdAt
-  * dimensions (These represent the character's size in the video game)
-  * destroy() // prototype method -> returns the string: 'Object was removed from the game.'
-*/
 
-/*
-  === CharacterStats ===
-  * healthPoints
-  * name
-  * takeDamage() // prototype method -> returns the string '<object name> took damage.'
-  * should inherit destroy() from GameObject's prototype
-*/
+  function GameObject(attr){
+    this.createdAt = "January 22, 2019";
+    this.dimensions = attr.dimensions;
+    this.dimensions.length = attr.dimensions.length;
+    this.dimensions.width = attr.dimensions.width;
+    this.dimensions.height = attr.dimensions.height;
+    // (These represent the character's size in the video game)
+    
+  
+  }
 
-/*
-  === Humanoid (Having an appearance or character resembling that of a human.) ===
-  * team
-  * weapons
-  * language
-  * greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
-  * should inherit destroy() from GameObject through CharacterStats
-  * should inherit takeDamage() from CharacterStats
-*/
- 
-/*
+    GameObject.prototype.destroy = function(attr){// prototype method -> returns the string: 'Object was removed from the game.'
+      return `Object was removed from the game.`;
+    }
+
+  function CharacterStats(childattr){ 
+    this.healthPoints = (`${childattr.healthPoints} HP`);
+    this.name = childattr.name;
+  }
+
+  CharacterStats.prototype.takeDamage = function (){
+    return `${object} took damage.`;
+  }
+
+   // prototype method -> returns the string '<object name> took damage.'
+  //should inherit destroy() from GameObject's prototype
+
+  //  Person.prototype.speak = function () {
+//   return `Hello, my name is ${this.name}`;
+// };
+
+
+
+  function Humanoid(grandchildattr){ /*(Having an appearance or character resembling that of a human.) ===*/
+    this.team = grandchildattr.team;
+    this.weapons = grandchildattr.weapons;
+    this.language = grandchildattr.language
+    
+  }
+  Humanoid.prototype.greet = function(){
+    return `${this.name} offers a greeting in ${this.language}.`
+  } 
+  // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
+    // should inherit destroy() from GameObject through CharacterStats
+    // should inherit takeDamage() from CharacterStats
+
+
+
+  function CharacterStats(childattr){
+      GameObject.call(this, childattr);
+      this.isCharacterStats = childattr.isCharacterStats;
+  }
+
+  function Humanoid(grandchildattr) {
+    CharacterStats.call(this, grandchildattr); 
+    this.isHumanoid = grandchildattr.isHumanoid; 
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
   * Instances of CharacterStats should have all of the same properties as GameObject.
