@@ -10,7 +10,7 @@
   
 
   function GameObject(attr){
-    this.createdAt = "January 22, 2019";
+    this.createdAt = new Date;
     this.dimensions = attr.dimensions;
     this.dimensions.length = attr.dimensions.length;
     this.dimensions.width = attr.dimensions.width;
@@ -21,7 +21,7 @@
   }
 
     GameObject.prototype.destroy = function(attr){// prototype method -> returns the string: 'Object was removed from the game.'
-      return `Object was removed from the game.`;
+      return `${this.name} was removed from the game.`;
     }
 
   function CharacterStats(childattr){ 
@@ -31,9 +31,9 @@
       this.isCharacterStats = childattr.isCharacterStats;
   }
  
-  
+  CharacterStats.prototype = Object.create(GameObject.prototype)
   CharacterStats.prototype.takeDamage = function (childattr){
-    return `${object} took damage.`;
+    return `${this.name} took damage.`;
   }
 
    // prototype method -> returns the string '<object name> took damage.'
@@ -49,6 +49,7 @@
     CharacterStats.call(this, grandchildattr); 
     this.isHumanoid = grandchildattr.isHumanoid; 
   }
+  Humanoid.prototype = Object.create(CharacterStats.prototype)
   Humanoid.prototype.greet = function(grandchildattr){
     return `${this.name} offers a greeting in ${this.language}.`
   } 
@@ -67,7 +68,8 @@
 
 
 
-
+  
+  
 
 
 
